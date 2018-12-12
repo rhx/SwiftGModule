@@ -1,9 +1,17 @@
+// swift-tools-version:4.0
+
 import PackageDescription
 
 let package = Package(
     name: "GModule",
-    dependencies: [
-        .Package(url: "https://github.com/rhx/SwiftGLib.git", majorVersion: 2)
+    products: [
+        .library(name: "GModule", targets: ["GModule"]),
     ],
-    swiftLanguageVersions: [3, 4]
+    dependencies: [
+        .package(url: "https://github.com/rhx/SwiftGLib.git", .branch("master"))
+    ],
+    targets: [
+        .target(name: "GModule", dependencies: ["GLib"]),
+        .testTarget(name: "GModuleTests", dependencies: ["GModule"]),
+    ]
 )

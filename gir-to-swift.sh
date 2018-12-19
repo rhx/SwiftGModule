@@ -31,8 +31,8 @@ echo >> Sources/${Mod}/Swift${Mod}.swift ""
 grep '^open class' Sources/${Mod}/${Module}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/public typealias _GModule_\1 = \1/' >> Sources/${Mod}/Swift${Mod}.swift
 echo >> Sources/${Mod}/Swift${Mod}.swift ""
 echo >> Sources/${Mod}/Swift${Mod}.swift "public extension ${Mod} {"
-grep 'public protocol' Sources/${Mod}/${Module}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/    public typealias \1 = _GModule_\1/' >> Sources/${Mod}/Swift${Mod}.swift
+grep 'public protocol' Sources/${Mod}/${Module}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/    typealias \1 = _GModule_\1/' >> Sources/${Mod}/Swift${Mod}.swift
 echo >> Sources/${Mod}/Swift${Mod}.swift ""
-grep '^open class' Sources/${Mod}/${Module}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/    public typealias \1 = _GModule_\1/' >> Sources/${Mod}/Swift${Mod}.swift
-grep '^public typealias' Sources/${Mod}/${Module}.swift | sed 's/^/    /' >> Sources/${Mod}/Swift${Mod}.swift
+grep '^open class' Sources/${Mod}/${Module}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/    typealias \1 = _GModule_\1/' >> Sources/${Mod}/Swift${Mod}.swift
+grep '^public typealias' Sources/${Mod}/${Module}.swift | sed 's/^public/   /' >> Sources/${Mod}/Swift${Mod}.swift
 echo >> Sources/${Mod}/Swift${Mod}.swift "}"

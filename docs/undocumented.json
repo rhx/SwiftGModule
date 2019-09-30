@@ -1,0 +1,68 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/GModule-2.0.swift",
+      "line": 9,
+      "symbol": "GModule",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/GModule-2.0.swift",
+      "line": 73,
+      "symbol": "GModule",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/SwiftGModule.swift",
+      "line": 4,
+      "symbol": "_GModule_ModuleProtocol",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/SwiftGModule.swift",
+      "line": 7,
+      "symbol": "_GModule_Module",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/SwiftGModule.swift",
+      "line": 10,
+      "symbol": "GModule.ModuleProtocol",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/SwiftGModule.swift",
+      "line": 12,
+      "symbol": "GModule.Module",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/SwiftGModule.swift",
+      "line": 13,
+      "symbol": "GModule.ModuleCheckInit",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/SwiftGModule.swift",
+      "line": 14,
+      "symbol": "GModule.ModuleUnload",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule/Sources/GModule/SwiftGModule.swift",
+      "line": 15,
+      "symbol": "GModule.ModuleFlags",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/s254227/Dropbox/Developer/src/swift/rh/gtk/SwiftGModule"
+}

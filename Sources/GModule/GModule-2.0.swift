@@ -152,7 +152,7 @@ public func moduleSupported() -> Bool {
 /// Alternatively, use `ModuleRef` as a lighweight, `unowned` reference if you already have an instance you just want to use.
 ///
 /// The `GModule` struct is an opaque data structure to represent a
-/// [dynamically-loaded module][glib-Dynamic-Loading-of-Modules].
+/// [dynamically-loaded module](#glib-Dynamic-Loading-of-Modules).
 /// It should only be accessed via the following functions.
 public protocol ModuleProtocol {
     /// Untyped pointer to the underlying `GModule` instance.
@@ -167,7 +167,7 @@ public protocol ModuleProtocol {
 /// Use `ModuleRef` only as an `unowned` reference to an existing `GModule` instance.
 ///
 /// The `GModule` struct is an opaque data structure to represent a
-/// [dynamically-loaded module][glib-Dynamic-Loading-of-Modules].
+/// [dynamically-loaded module](#glib-Dynamic-Loading-of-Modules).
 /// It should only be accessed via the following functions.
 public struct ModuleRef: ModuleProtocol {
     /// Untyped pointer to the underlying `GModule` instance.
@@ -238,7 +238,7 @@ public extension ModuleRef {
 /// Use `Module` as a strong reference or owner of a `GModule` instance.
 ///
 /// The `GModule` struct is an opaque data structure to represent a
-/// [dynamically-loaded module][glib-Dynamic-Loading-of-Modules].
+/// [dynamically-loaded module](#glib-Dynamic-Loading-of-Modules).
 /// It should only be accessed via the following functions.
 open class Module: ModuleProtocol {
     /// Untyped pointer to the underlying `GModule` instance.

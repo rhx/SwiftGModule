@@ -78,18 +78,18 @@ public struct GModule {}
 
 
 /// Specifies the type of the module initialization function.
-/// If a module contains a function named g_module_check_init() it is called
+/// If a module contains a function named `g_module_check_init()` it is called
 /// automatically when the module is loaded. It is passed the `GModule` structure
 /// and should return `nil` on success or a string describing the initialization
 /// error.
 public typealias ModuleCheckInit = GModuleCheckInit
 
 /// Specifies the type of the module function called when it is unloaded.
-/// If a module contains a function named g_module_unload() it is called
+/// If a module contains a function named `g_module_unload()` it is called
 /// automatically when the module is unloaded.
 /// It is passed the `GModule` structure.
 public typealias ModuleUnload = GModuleUnload
-/// Flags passed to g_module_open().
+/// Flags passed to `g_module_open()`.
 /// Note that these flags are not supported on all platforms.
 public typealias ModuleFlags = GModuleFlags
 
@@ -115,7 +115,7 @@ public extension ModuleFlags {
 /// standard platform-specific directory, though this is not recommended
 /// since the wrong module may be found.
 /// 
-/// For example, calling g_module_build_path() on a Linux system with a
+/// For example, calling `g_module_build_path()` on a Linux system with a
 /// `directory` of `/lib` and a `module_name` of "mylibrary" will return
 /// `/lib/libmylibrary.so`. On a Windows system, using `\Windows` as the
 /// directory it will return `\Windows\mylibrary.dll`.
@@ -218,13 +218,13 @@ public extension ModuleRef {
         /// Opens a module. If the module has already been opened,
     /// its reference count is incremented.
     /// 
-    /// First of all g_module_open() tries to open `file_name` as a module.
+    /// First of all `g_module_open()` tries to open `file_name` as a module.
     /// If that fails and `file_name` has the ".la"-suffix (and is a libtool
     /// archive) it tries to open the corresponding module. If that fails
     /// and it doesn't have the proper module suffix for the platform
     /// (`G_MODULE_SUFFIX`), this suffix will be appended and the corresponding
     /// module will be opended. If that fails and `file_name` doesn't have the
-    /// ".la"-suffix, this suffix is appended and g_module_open() tries to open
+    /// ".la"-suffix, this suffix is appended and `g_module_open()` tries to open
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
     static func open(fileName file_name: UnsafePointer<gchar>, flags: ModuleFlags) -> ModuleRef! {
@@ -291,13 +291,13 @@ open class Module: ModuleProtocol {
     /// Opens a module. If the module has already been opened,
     /// its reference count is incremented.
     /// 
-    /// First of all g_module_open() tries to open `file_name` as a module.
+    /// First of all `g_module_open()` tries to open `file_name` as a module.
     /// If that fails and `file_name` has the ".la"-suffix (and is a libtool
     /// archive) it tries to open the corresponding module. If that fails
     /// and it doesn't have the proper module suffix for the platform
     /// (`G_MODULE_SUFFIX`), this suffix will be appended and the corresponding
     /// module will be opended. If that fails and `file_name` doesn't have the
-    /// ".la"-suffix, this suffix is appended and g_module_open() tries to open
+    /// ".la"-suffix, this suffix is appended and `g_module_open()` tries to open
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
     public static func open(fileName file_name: UnsafePointer<gchar>, flags: ModuleFlags) -> Module! {
@@ -323,7 +323,7 @@ public extension ModuleProtocol {
     }
 
     /// Ensures that a module will never be unloaded.
-    /// Any future g_module_close() calls on the module will be ignored.
+    /// Any future `g_module_close()` calls on the module will be ignored.
     func makeResident() {
         g_module_make_resident(cast(_ptr))
     

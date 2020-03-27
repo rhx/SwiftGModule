@@ -11,5 +11,7 @@ fi
 ./build.sh
 rm -rf .docs.old
 mv docs .docs.old 2>/dev/null
+[ -e .build ] || ln -s "$BUILD_DIR" .build
 jazzy --swift-build-tool spm --clean --module-version $JAZZY_VER	\
       --module $Mod $JAZZY_ARGS "$@" -b $JAZZY_B
+rm -f .build 2>/dev/null

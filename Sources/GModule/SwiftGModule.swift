@@ -12,5 +12,4 @@ public extension GModule {
     typealias Module = _GModule_Module
     typealias ModuleCheckInit = GModuleCheckInit
     typealias ModuleUnload = GModuleUnload
-    typealias ModuleFlags = GModuleFlags
 }

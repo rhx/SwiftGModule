@@ -1,3 +1,33 @@
+
+func cast(_ param: UInt)   -> Int    {    Int(bitPattern: param) }
+func cast(_ param: Int)    -> UInt   {   UInt(bitPattern: param) }
+func cast(_ param: UInt16) -> Int16  {  Int16(bitPattern: param) }
+func cast(_ param: Int16)  -> UInt16 { UInt16(bitPattern: param) }
+func cast(_ param: UInt32) -> Int32  {  Int32(bitPattern: param) }
+func cast(_ param: Int32)  -> UInt32 { UInt32(bitPattern: param) }
+func cast(_ param: UInt64) -> Int64  {  Int64(bitPattern: param) }
+func cast(_ param: Int64)  -> UInt64 { UInt64(bitPattern: param) }
+func cast(_ param: Float)  -> Double { Double(param) }
+func cast(_ param: Float80) -> Double { Double(param) }
+func cast(_ param: Double) -> Float { Float(param) }
+func cast(_ param: Double) -> Float80 { Float80(param) }
+func cast<U: UnsignedInteger>(_ param: U) -> Int { Int(param) }
+func cast<S: SignedInteger>(_ param: S) -> Int { Int(param) }
+func cast<U: UnsignedInteger>(_ param: Int) -> U { U(param) }
+func cast<S: SignedInteger>(_ param: Int) -> S  { S(param) }
+func cast<I: BinaryInteger>(_ param: I) -> Int32 { Int32(param) }
+func cast<I: BinaryInteger>(_ param: I) -> UInt32 { UInt32(param) }
+func cast<I: BinaryInteger>(_ param: I) -> Bool { param != 0 }
+func cast<I: BinaryInteger>(_ param: Bool) -> I { param ? 1 : 0 }
+
+func cast(_ param: UnsafeRawPointer?) -> String! {
+    return param.map { String(cString: $0.assumingMemoryBound(to: CChar.self)) }
+}
+
+func cast(_ param: OpaquePointer?) -> String! {
+    return param.map { String(cString: UnsafePointer<CChar>($0)) }
+}
+
 func cast(_ param: UnsafeRawPointer) -> OpaquePointer! {
     return OpaquePointer(param)
 }
@@ -77,6 +107,7 @@ public struct GModule {}
 
 
 
+
 /// Specifies the type of the module initialization function.
 /// If a module contains a function named `g_module_check_init()` it is called
 /// automatically when the module is loaded. It is passed the `GModule` structure
@@ -91,21 +122,45 @@ public typealias ModuleCheckInit = GModuleCheckInit
 public typealias ModuleUnload = GModuleUnload
 /// Flags passed to `g_module_open()`.
 /// Note that these flags are not supported on all platforms.
-public typealias ModuleFlags = GModuleFlags
+public struct ModuleFlags: OptionSet {
+    /// The corresponding value of the raw type
+    public var rawValue: UInt32 = 0
+    /// The equivalent raw Int value
+    public var intValue: Int { get { Int(rawValue) } set { rawValue = UInt32(newValue) } }
+    /// The equivalent raw `gint` value
+    public var int: gint { get { gint(rawValue) } set { rawValue = UInt32(newValue) } }
+    /// The equivalent underlying `GModuleFlags` enum value
+    public var value: GModuleFlags { get { GModuleFlags(rawValue: cast(rawValue)) } set { rawValue = UInt32(newValue.rawValue) } }
 
-public extension ModuleFlags {
+    /// Creates a new instance with the specified raw value
+    public init(rawValue: UInt32) { self.rawValue = rawValue }
+    /// Creates a new instance with the specified `GModuleFlags` enum value
+    public init(_ enumValue: GModuleFlags) { self.rawValue = UInt32(enumValue.rawValue) }
+    /// Creates a new instance with the specified Int value
+    public init(_ intValue: Int)   { self.rawValue = UInt32(intValue)  }
+    /// Creates a new instance with the specified `gint` value
+    public init(_ gintValue: gint) { self.rawValue = UInt32(gintValue) }
+
     /// specifies that symbols are only resolved when
     ///     needed. The default action is to bind all symbols when the module
     ///     is loaded.
-    static let lazy_ = G_MODULE_BIND_LAZY /* 1 */
+    public static let `lazy` = ModuleFlags(1) /* G_MODULE_BIND_LAZY */
     /// specifies that symbols in the module should
     ///     not be added to the global name space. The default action on most
     ///     platforms is to place symbols in the module in the global name space,
     ///     which may cause conflicts with existing symbols.
-    static let local = G_MODULE_BIND_LOCAL /* 2 */
+    public static let local = ModuleFlags(2) /* G_MODULE_BIND_LOCAL */
     /// mask for all flags.
-    static let mask = G_MODULE_BIND_MASK /* 3 */
+    public static let mask = ModuleFlags(3) /* G_MODULE_BIND_MASK */
+
+    /// specifies that symbols are only resolved when
+    ///     needed. The default action is to bind all symbols when the module
+    ///     is loaded.
+    @available(*, deprecated) public static let lazy_ = ModuleFlags(1) /* G_MODULE_BIND_LAZY */
 }
+func cast<I: BinaryInteger>(_ param: I) -> ModuleFlags { ModuleFlags(rawValue: cast(param)) }
+func cast(_ param: ModuleFlags) -> UInt32 { cast(param.rawValue) }
+
 /// A portable way to build the filename of a module. The platform-specific
 /// prefix and suffix are added to the filename, if needed, and the result
 /// is added to the directory, using the correct separator character.
@@ -120,8 +175,8 @@ public extension ModuleFlags {
 /// `/lib/libmylibrary.so`. On a Windows system, using `\Windows` as the
 /// directory it will return `\Windows\mylibrary.dll`.
 public func moduleBuildPath(directory: UnsafePointer<gchar>, moduleName module_name: UnsafePointer<gchar>) -> String! {
-    let rv = g_module_build_path(directory, module_name)
-    return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+    let rv: String! = cast(g_module_build_path(directory, module_name))
+    return cast(rv)
 }
 
 
@@ -129,8 +184,8 @@ public func moduleBuildPath(directory: UnsafePointer<gchar>, moduleName module_n
 
 /// Gets a string describing the last module error.
 public func moduleError() -> String! {
-    let rv = g_module_error()
-    return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+    let rv: String! = cast(g_module_error())
+    return cast(rv)
 }
 
 
@@ -155,7 +210,7 @@ public func moduleSupported() -> Bool {
 /// [dynamically-loaded module](#glib-Dynamic-Loading-of-Modules).
 /// It should only be accessed via the following functions.
 public protocol ModuleProtocol {
-    /// Untyped pointer to the underlying `GModule` instance.
+        /// Untyped pointer to the underlying `GModule` instance.
     var ptr: UnsafeMutableRawPointer { get }
 
     /// Typed pointer to the underlying `GModule` instance.
@@ -170,7 +225,7 @@ public protocol ModuleProtocol {
 /// [dynamically-loaded module](#glib-Dynamic-Loading-of-Modules).
 /// It should only be accessed via the following functions.
 public struct ModuleRef: ModuleProtocol {
-    /// Untyped pointer to the underlying `GModule` instance.
+        /// Untyped pointer to the underlying `GModule` instance.
     /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 }
@@ -228,7 +283,7 @@ public extension ModuleRef {
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
     static func open(fileName file_name: UnsafePointer<gchar>, flags: ModuleFlags) -> ModuleRef! {
-        let rv = g_module_open(file_name, flags)
+        let rv: UnsafeMutablePointer<GModule>! = cast(g_module_open(file_name, flags.value))
         return rv.map { ModuleRef(cast($0)) }
     }
 }
@@ -241,7 +296,7 @@ public extension ModuleRef {
 /// [dynamically-loaded module](#glib-Dynamic-Loading-of-Modules).
 /// It should only be accessed via the following functions.
 open class Module: ModuleProtocol {
-    /// Untyped pointer to the underlying `GModule` instance.
+        /// Untyped pointer to the underlying `GModule` instance.
     /// For type-safe access, use the generated, typed pointer `_ptr` property instead.
     public let ptr: UnsafeMutableRawPointer
 
@@ -270,7 +325,7 @@ open class Module: ModuleProtocol {
         // no reference counting for GModule, cannot ref(cast(_ptr))
     }
 
-    /// Do-nothing destructor for`GModule`.
+    /// Do-nothing destructor for `GModule`.
     deinit {
         // no reference counting for GModule, cannot unref(cast(_ptr))
     }
@@ -348,17 +403,18 @@ open class Module: ModuleProtocol {
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
     public static func open(fileName file_name: UnsafePointer<gchar>, flags: ModuleFlags) -> Module! {
-        let rv = g_module_open(file_name, flags)
+        let rv: UnsafeMutablePointer<GModule>! = cast(g_module_open(file_name, flags.value))
         return rv.map { Module(cast($0)) }
     }
 
 }
 
-// MARK: - no Module properties
+// MARK: no Module properties
 
-// MARK: - no signals
+// MARK: no Module signals
 
 
+// MARK: Module Record: ModuleProtocol extension (methods and fields)
 public extension ModuleProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GModule` instance.
     var _ptr: UnsafeMutablePointer<GModule> { return ptr.assumingMemoryBound(to: GModule.self) }
@@ -380,8 +436,8 @@ public extension ModuleProtocol {
     /// 
     /// If `module` refers to the application itself, "main" is returned.
     func name() -> String! {
-        let rv = g_module_name(cast(_ptr))
-        return rv.map { String(cString: UnsafePointer<CChar>($0)) }
+        let rv: String! = cast(g_module_name(cast(_ptr)))
+        return cast(rv)
     }
 
     /// Gets a symbol pointer from a module, such as one exported
@@ -390,6 +446,8 @@ public extension ModuleProtocol {
         let rv = g_module_symbol(cast(_ptr), symbol_name, cast(symbol))
         return Bool(rv != 0)
     }
+
+
 }
 
 

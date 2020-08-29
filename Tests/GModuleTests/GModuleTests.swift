@@ -8,7 +8,7 @@ class GModuleTests: XCTestCase {
     }
 
     func testNonExistent() {
-        XCTAssertNil(ModuleRef.open(fileName: "non/existent", flags: ModuleFlags(rawValue: UInt32(0))))
+        XCTAssertNil(ModuleRef.open(fileName: "non/existent", flags: []))
     }
 
 }

@@ -92,8 +92,8 @@ public struct ModuleFlags: OptionSet {
 /// `directory` of `/lib` and a `module_name` of "mylibrary" will return
 /// `/lib/libmylibrary.so`. On a Windows system, using `\Windows` as the
 /// directory it will return `\Windows\mylibrary.dll`.
-@inlinable public func moduleBuildPath(directory: UnsafePointer<gchar>? = nil, moduleName module_name: UnsafePointer<gchar>!) -> String! {
-    guard let rv = g_module_build_path(directory, module_name).map({ String(cString: $0) }) else { return nil }
+@inlinable public func moduleBuildPath(directory: UnsafePointer<gchar>? = nil, moduleName: UnsafePointer<gchar>!) -> String! {
+    guard let rv = g_module_build_path(directory, moduleName).map({ String(cString: $0) }) else { return nil }
     return rv
 }
 
@@ -203,7 +203,7 @@ public extension ModuleRef {
 
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `ModuleProtocol`.**
-    @inlinable init(raw: UnsafeRawPointer) {
+    @inlinable init(mutating raw: UnsafeRawPointer) {
         ptr = UnsafeMutableRawPointer(mutating: raw)
     }
 
@@ -231,8 +231,8 @@ public extension ModuleRef {
     /// ".la"-suffix, this suffix is appended and `g_module_open()` tries to open
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
-    @inlinable static func open(fileName file_name: UnsafePointer<gchar>? = nil, flags: ModuleFlags) -> ModuleRef! {
-        guard let rv = ModuleRef(gconstpointer: gconstpointer(g_module_open(file_name, flags.value))) else { return nil }
+    @inlinable static func open(fileName: UnsafePointer<gchar>? = nil, flags: ModuleFlags) -> ModuleRef! {
+        guard let rv = ModuleRef(gconstpointer: gconstpointer(g_module_open(fileName, flags.value))) else { return nil }
         return rv
     }
 }
@@ -397,8 +397,8 @@ open class Module: ModuleProtocol {
     /// ".la"-suffix, this suffix is appended and `g_module_open()` tries to open
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
-    @inlinable public static func open(fileName file_name: UnsafePointer<gchar>? = nil, flags: ModuleFlags) -> Module! {
-        guard let rv = Module(gconstpointer: gconstpointer(g_module_open(file_name, flags.value))) else { return nil }
+    @inlinable public static func open(fileName: UnsafePointer<gchar>? = nil, flags: ModuleFlags) -> Module! {
+        guard let rv = Module(gconstpointer: gconstpointer(g_module_open(fileName, flags.value))) else { return nil }
         return rv
     }
 
@@ -437,8 +437,8 @@ public extension ModuleProtocol {
 
     /// Gets a symbol pointer from a module, such as one exported
     /// by `G_MODULE_EXPORT`. Note that a valid symbol can be `nil`.
-    @inlinable func symbol(symbolName symbol_name: UnsafePointer<gchar>!, symbol: UnsafeMutablePointer<gpointer?>?) -> Bool {
-        let rv = ((g_module_symbol(_ptr, symbol_name, symbol)) != 0)
+    @inlinable func symbol(symbolName: UnsafePointer<gchar>!, symbol: UnsafeMutablePointer<gpointer?>?) -> Bool {
+        let rv = ((g_module_symbol(_ptr, symbolName, symbol)) != 0)
         return rv
     }
 

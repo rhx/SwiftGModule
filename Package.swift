@@ -6,6 +6,7 @@ let package = Package(
     name: "GModule",
     products: [ .library(name: "GModule", targets: ["GModule"]) ],
     dependencies: [
+        .package(name: "gir2swift", url: "https://github.com/mikolasstuchlik/gir2swift.git", .branch("master")),
         .package(name: "GLib", url: "https://github.com/mikolasstuchlik/SwiftGLib.git", .branch("master"))
     ],
     targets: [

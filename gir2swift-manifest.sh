@@ -15,9 +15,22 @@ function generate_arg-path_arg-g2s-exec_arg-gir-pre_arg-gir-path {
     local NAME=$(package_name)
     local GIR_PRE_ARGS=`for FILE in ${GIR_PRE}; do echo -n "-p ${GIR_PATH}/${FILE}.gir "; done`
     
-    bash -c "${G2S_EXEC} -o Sources/${NAME} -s -m ${GIR_NAME}.module ${GIR_PATH}/${GIR_NAME}.gir ${GIR_PRE_ARGS}"
+    bash -c "${G2S_EXEC} ${GIR_PATH}/${GIR_NAME}.gir ${GIR_PRE_ARGS} | sed -f ${GIR_NAME}.sed > Sources/${NAME}/${GIR_NAME}.swift"
 
-    ...
+    echo  > Sources/${NAME}/Swift${NAME}.swift "import CGLib"
+    echo >> Sources/${NAME}/Swift${NAME}.swift "import GLib"
+    echo >> Sources/${NAME}/Swift${NAME}.swift ""
+    grep 'public protocol' Sources/${NAME}/${GIR_NAME}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/public typealias _GModule_\1 = \1/' >> Sources/${NAME}/Swift${NAME}.swift
+    echo >> Sources/${NAME}/Swift${NAME}.swift ""
+    echo >> Sources/${NAME}/Swift${NAME}.swift ""
+    grep '^open class' Sources/${NAME}/${GIR_NAME}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/public typealias _GModule_\1 = \1/' >> Sources/${NAME}/Swift${NAME}.swift
+    echo >> Sources/${NAME}/Swift${NAME}.swift ""
+    echo >> Sources/${NAME}/Swift${NAME}.swift "public extension ${NAME} {"
+    grep 'public protocol' Sources/${NAME}/${GIR_NAME}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/    typealias \1 = _GModule_\1/' >> Sources/${NAME}/Swift${NAME}.swift
+    echo >> Sources/${NAME}/Swift${NAME}.swift ""
+    grep '^open class' Sources/${NAME}/${GIR_NAME}.swift | cut -d' ' -f3 | cut -d: -f1 | sort -u | sed -e 's/^\(.*\)/    typealias \1 = _GModule_\1/' >> Sources/${NAME}/Swift${NAME}.swift
+    grep '^public typealias' Sources/${NAME}/${GIR_NAME}.swift | sed 's/^public/   /' >> Sources/${NAME}/Swift${NAME}.swift
+    echo >> Sources/${NAME}/Swift${NAME}.swift "}"
 
     cd $CALLER
 }

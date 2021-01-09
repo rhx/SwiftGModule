@@ -76,7 +76,7 @@ On macOS, you can install glib using HomeBrew (for setup instructions, see http:
 
 ## Usage
 
-Normally, you don't build this package directly (but for testing you can - see 'Building' below). Instead you need to embed SwiftGObject into your own project using the [Swift Package Manager](https://swift.org/package-manager/).  After installing the prerequisites (see 'Prerequisites' below), add `SwiftGObject` as a dependency to your `Package.swift` file, e.g.:
+Normally, you don't build this package directly (but for testing you can - see 'Building' below). Instead you need to embed SwiftGModule into your own project using the [Swift Package Manager](https://swift.org/package-manager/).  After installing the prerequisites (see 'Prerequisites' below), add `SwiftGModule` as a dependency to your `Package.swift` file, e.g.:
 
 ```Swift
 // swift-tools-version:5.3
@@ -85,9 +85,9 @@ import PackageDescription
 
 let package = Package(name: "MyPackage",
     dependencies: [
-        .package(name: "GLibObject", url: "https://github.com/rhx/SwiftGObject.git", .branch("main")),
+        .package(name: "GModule", url: "https://github.com/rhx/SwiftGModule.git", .branch("main")),
     ],
-    targets: [.target(name: "MyPackage", dependencies: ["GLibObject"])]
+    targets: [.target(name: "MyPackage", dependencies: ["GModule"])]
 )
 ```
 
@@ -95,8 +95,8 @@ let package = Package(name: "MyPackage",
 ## Building
 Normally, you don't build this package directly, but you embed it into your own project (see 'Usage' above).  However, you can build and test this module separately to ensure that everything works.  Make sure you have all the prerequisites installed (see above).  After that, you can simply clone this repository and build the command line executable (be patient, this will download all the required dependencies and take a while to compile) using
 
-	git clone https://github.com/rhx/SwiftGObject.git
-	cd SwiftGObject
+	git clone https://github.com/rhx/SwiftGModule.git
+	cd SwiftGModule
     ./run-gir2swift.sh
     swift build
     swift test

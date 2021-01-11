@@ -146,5 +146,5 @@ this probably means that your Swift toolchain is too old.  Make sure the latest 
  * The current build system does not support directory paths with spaces (e.g. the `My Drive` directory used by Google Drive File Stream).
  * BUILD_DIR is not supported in the current build system.
  
-As a workaround, you can use the old build scripts, e.g. `./build.sh` instead of `run-gir2swift.sh` and `swift build` to build a package.
+As a workaround, you can use the old build scripts, e.g. `./build.sh` (instead of `run-gir2swift.sh` and `swift build`) to build a package.
  

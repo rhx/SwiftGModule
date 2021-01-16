@@ -408,7 +408,7 @@ open class Module: ModuleProtocol {
 
 // MARK: no Module signals
 
-
+// MARK: Module has no signals
 // MARK: Module Record: ModuleProtocol extension (methods and fields)
 public extension ModuleProtocol {
     /// Return the stored, untyped pointer as a typed pointer to the `GModule` instance.

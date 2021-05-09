@@ -134,6 +134,8 @@ public protocol ModuleProtocol {
     /// Typed pointer to the underlying `GModule` instance.
     var _ptr: UnsafeMutablePointer<GModule>! { get }
 
+    /// Required Initialiser for types conforming to `ModuleProtocol`
+    init(raw: UnsafeMutableRawPointer)
 }
 
 /// The `ModuleRef` type acts as a lightweight Swift reference to an underlying `GModule` instance.
@@ -357,7 +359,7 @@ open class Module: ModuleProtocol {
     /// Unsafe untyped initialiser.
     /// **Do not use unless you know the underlying data type the pointer points to conforms to `ModuleProtocol`.**
     /// - Parameter p: mutable raw pointer to the underlying object
-    @inlinable public init(raw p: UnsafeMutableRawPointer) {
+    @inlinable public required init(raw p: UnsafeMutableRawPointer) {
         ptr = p
     }
 

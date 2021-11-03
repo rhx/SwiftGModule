@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>GModule Extension Reference</title>
+    <title>ModuleError Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Extension/GModule" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Extension/ModuleError" class="dashAnchor"></a>
 
-    <a title="GModule Extension Reference"></a>
+    <a title="ModuleError Extension Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -50,7 +50,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">GModule Reference</a>
       <img class="carat" src="../img/carat.png" alt=""/>
-      GModule Extension Reference
+      ModuleError Extension Reference
     </p>
 
     <div class="content-wrapper">
@@ -140,15 +140,18 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>GModule</h1>
+            <h1>ModuleError</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">GModule</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt"><a href="../Typealiases.html#/s:7GModule11ModuleErrora">ModuleError</a></span></code></pre>
 
                 </div>
               </div>
             
+              <div class="slightly-smaller">
+                <a href="https://github.com/rhx/SwiftGModule/tree/generated/Sources/GModule/GModule-2.0-enumerations.swift#L8-L22">Show on GitHub</a>
+              </div>
           </div>
         </section>
 
@@ -159,9 +162,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8_GModuleV0A0E6Modulea"></a>
-                    <a name="//apple_ref/swift/Alias/Module" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8_GModuleV0A0E6Modulea">Module</a>
+                    <a name="/s:So12GModuleErrora0A0EyABSgxcSzRzlufc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So12GModuleErrora0A0EyABSgxcSzRzlufc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -169,21 +172,40 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code>GModule</code> struct is an opaque data structure to represent a
-<a href="#glib-Dynamic-Loading-of-Modules">dynamically-loaded module</a>.
-It should only be accessed via the following functions.</p>
+                        <p>Cast constructor, converting any binary integer to a
+<code><a href="../Typealiases.html#/s:7GModule11ModuleErrora">ModuleError</a></code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Module</span> <span class="o">=</span> <span class="n"><a href="../Typealiases.html#/s:7GModule01_A7_Modulea">_GModule_Module</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">init</span><span class="o">!&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">raw</span><span class="p">:</span> <span class="kt">I</span><span class="p">)</span> <span class="k">where</span> <span class="kt">I</span> <span class="p">:</span> <span class="kt">BinaryInteger</span></code></pre>
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The raw integer value to initialise the enum from</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGModule/tree/generated/Sources/GModule/GModule-2.0-namespaces.swift#L28">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGModule/tree/generated/Sources/GModule/GModule-2.0-enumerations.swift#L12-L15">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -191,9 +213,9 @@ It should only be accessed via the following functions.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8_GModuleV0A0E11ModuleErrora"></a>
-                    <a name="//apple_ref/swift/Alias/ModuleError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8_GModuleV0A0E11ModuleErrora">ModuleError</a>
+                    <a name="/s:So12GModuleErrora0A0E6failedABvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/failed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So12GModuleErrora0A0E6failedABvpZ">failed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -201,19 +223,19 @@ It should only be accessed via the following functions.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Errors returned by <code>g_module_open_full()</code>.</p>
+                        <p>there was an error loading or opening a module file</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ModuleError</span> <span class="o">=</span> <span class="n"><a href="../Typealiases.html#/s:7GModule01_A12_ModuleErrora">_GModule_ModuleError</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">failed</span><span class="p">:</span> <span class="kt">GModuleError</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGModule/tree/generated/Sources/GModule/GModule-2.0-namespaces.swift#L34">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGModule/tree/generated/Sources/GModule/GModule-2.0-enumerations.swift#L17">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -221,9 +243,9 @@ It should only be accessed via the following functions.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8_GModuleV0A0E11ModuleFlagsa"></a>
-                    <a name="//apple_ref/swift/Alias/ModuleFlags" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8_GModuleV0A0E11ModuleFlagsa">ModuleFlags</a>
+                    <a name="/s:So12GModuleErrora0A0E11checkFailedABvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/checkFailed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So12GModuleErrora0A0E11checkFailedABvpZ">checkFailed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -231,20 +253,19 @@ It should only be accessed via the following functions.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Flags passed to <code>g_module_open()</code>.
-Note that these flags are not supported on all platforms.</p>
+                        <p>a module returned an error from its <code>g_module_check_init()</code> function</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ModuleFlags</span> <span class="o">=</span> <span class="n"><a href="../Typealiases.html#/s:7GModule01_A12_ModuleFlagsa">_GModule_ModuleFlags</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">checkFailed</span><span class="p">:</span> <span class="kt">GModuleError</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/rhx/SwiftGModule/tree/generated/Sources/GModule/GModule-2.0-namespaces.swift#L39">Show on GitHub</a>
+                        <a href="https://github.com/rhx/SwiftGModule/tree/generated/Sources/GModule/GModule-2.0-enumerations.swift#L20">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

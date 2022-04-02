@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.6
 
 import PackageDescription
 
@@ -6,11 +6,20 @@ let package = Package(
     name: "GModule",
     products: [ .library(name: "GModule", targets: ["GModule"]) ],
     dependencies: [
-        .package(name: "gir2swift", url: "https://github.com/rhx/gir2swift.git", .branch("development")),
-        .package(name: "GLib", url: "https://github.com/rhx/SwiftGLib.git", .branch("development"))
+        .package(url: "https://github.com/rhx/gir2swift.git", branch: "development"),
+        .package(url: "https://github.com/rhx/SwiftGLib.git", branch: "development")
     ],
     targets: [
-        .target(name: "GModule", dependencies: ["GLib"]),
+        .target(
+            name: "GModule",
+            dependencies: [
+                .product(name: "gir2swift", package: "gir2swift"),
+                .product(name: "GLib",      package: "SwiftGLib"),
+            ],
+            plugins: [
+                .plugin(name: "gir2swift-plugin", package: "gir2swift")
+            ]
+        ),
         .testTarget(name: "GModuleTests", dependencies: ["GModule"]),
     ]
 )

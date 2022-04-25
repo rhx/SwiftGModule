@@ -16,14 +16,14 @@ on:
 
 jobs:
   # macOS tasks
-  build-mac-swift-big-sur:
+  build-mac-monterey:
     runs-on: macos-12.0
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.3'
+          xcode-version: '13.3.1'
 
       - name: Print Swift version to confirm
         run: swift --version
@@ -54,11 +54,3 @@ jobs:
           swift package clean
           rm -rf .build/repositories
           cd ..
-
-      - name: 'Upload Artefact'
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-artefact-big-sur
-          path: |
-            SwiftGModule/Sources/
-          retention-days: 1

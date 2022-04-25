@@ -15,7 +15,8 @@ import GLib
 /// `/lib/libmylibrary.so`. On a Windows system, using `\Windows` as the
 /// directory it will return `\Windows\mylibrary.dll`.
 @inlinable public func moduleBuildPath(directory: UnsafePointer<gchar>? = nil, moduleName: UnsafePointer<gchar>!) -> String! {
-    guard let rv = g_module_build_path(directory, moduleName).map({ String(cString: $0) }) else { return nil }
+    let result = g_module_build_path(directory, moduleName)
+    guard let rv = result.map({ String(cString: $0) }) else { return nil }
     return rv
 }
 
@@ -24,7 +25,8 @@ import GLib
 
 /// Gets a string describing the last module error.
 @inlinable public func moduleError() -> String! {
-    guard let rv = g_module_error().map({ String(cString: $0) }) else { return nil }
+    let result = g_module_error()
+    guard let rv = result.map({ String(cString: $0) }) else { return nil }
     return rv
 }
 
@@ -32,7 +34,8 @@ import GLib
 
 
 @inlinable public func moduleErrorQuark() -> GQuark {
-    let rv = g_module_error_quark()
+    let result = g_module_error_quark()
+    let rv = result
     return rv
 }
 
@@ -41,7 +44,8 @@ import GLib
 
 /// Checks if modules are supported on the current platform.
 @inlinable public func moduleSupported() -> Bool {
-    let rv = ((g_module_supported()) != 0)
+    let result = g_module_supported()
+    let rv = ((result) != 0)
     return rv
 }
 

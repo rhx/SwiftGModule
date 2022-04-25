@@ -109,7 +109,8 @@ public extension ModuleRef {
 
         /// A thin wrapper function around `g_module_open_full()`
     @inlinable static func open(fileName: UnsafePointer<gchar>? = nil, flags: ModuleFlags) -> ModuleRef! {
-        guard let rv = ModuleRef(gconstpointer: gconstpointer(g_module_open(fileName, flags.value))) else { return nil }
+            let result = g_module_open(fileName, flags.value)
+        guard let rv = ModuleRef(gconstpointer: gconstpointer(result)) else { return nil }
         return rv
     }
 
@@ -126,9 +127,11 @@ public extension ModuleRef {
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
     @inlinable static func openFull(fileName: UnsafePointer<gchar>? = nil, flags: ModuleFlags) throws -> ModuleRef! {
-        var error: UnsafeMutablePointer<GError>?
-        let maybeRV = ModuleRef(gconstpointer: gconstpointer(g_module_open_full(fileName, flags.value, &error)))
+            var error: UnsafeMutablePointer<GError>?
+        let result = g_module_open_full(fileName, flags.value, &error)
         if let error = error { throw GLibError(error) }
+        let maybeRV = ModuleRef(gconstpointer: gconstpointer(result))
+        
         guard let rv = maybeRV else { return nil }
         return rv
     }
@@ -285,7 +288,8 @@ open class Module: ModuleProtocol {
 
     /// A thin wrapper function around `g_module_open_full()`
     @inlinable public static func open(fileName: UnsafePointer<gchar>? = nil, flags: ModuleFlags) -> Module! {
-        guard let rv = Module(gconstpointer: gconstpointer(g_module_open(fileName, flags.value))) else { return nil }
+            let result = g_module_open(fileName, flags.value)
+        guard let rv = Module(gconstpointer: gconstpointer(result)) else { return nil }
         return rv
     }
 
@@ -302,9 +306,11 @@ open class Module: ModuleProtocol {
     /// the corresponding module. If eventually that fails as well, `nil` is
     /// returned.
     @inlinable public static func openFull(fileName: UnsafePointer<gchar>? = nil, flags: ModuleFlags) throws -> Module! {
-        var error: UnsafeMutablePointer<GError>?
-        let maybeRV = Module(gconstpointer: gconstpointer(g_module_open_full(fileName, flags.value, &error)))
+            var error: UnsafeMutablePointer<GError>?
+        let result = g_module_open_full(fileName, flags.value, &error)
         if let error = error { throw GLibError(error) }
+        let maybeRV = Module(gconstpointer: gconstpointer(result))
+        
         guard let rv = maybeRV else { return nil }
         return rv
     }
@@ -323,29 +329,33 @@ public extension ModuleProtocol {
 
     /// Closes a module.
     @inlinable func close() -> Bool {
-        let rv = ((g_module_close(_ptr)) != 0)
+        let result = g_module_close(_ptr)
+        let rv = ((result) != 0)
         return rv
     }
 
     /// Ensures that a module will never be unloaded.
     /// Any future `g_module_close()` calls on the module will be ignored.
     @inlinable func makeResident() {
+        
         g_module_make_resident(_ptr)
-    
+        
     }
 
     /// Returns the filename that the module was opened with.
     /// 
     /// If `module` refers to the application itself, "main" is returned.
     @inlinable func name() -> String! {
-        let rv = g_module_name(_ptr).map({ String(cString: $0) })
+        let result = g_module_name(_ptr)
+        let rv = result.map({ String(cString: $0) })
         return rv
     }
 
     /// Gets a symbol pointer from a module, such as one exported
     /// by `G_MODULE_EXPORT`. Note that a valid symbol can be `nil`.
     @inlinable func symbol(symbolName: UnsafePointer<gchar>!, symbol: UnsafeMutablePointer<gpointer?>?) -> Bool {
-        let rv = ((g_module_symbol(_ptr, symbolName, symbol)) != 0)
+        let result = g_module_symbol(_ptr, symbolName, symbol)
+        let rv = ((result) != 0)
         return rv
     }
 

@@ -2,10 +2,9 @@
 A Swift wrapper around gmodule-2.x that is largely auto-generated from gobject-introspection.
 For up to date (auto-generated) reference documentation, see https://rhx.github.io/SwiftGModule/
 
-![macOS 11 build](https://github.com/rhx/SwiftGModule/workflows/macOS%2011/badge.svg)
-![macOS 10.15 build](https://github.com/rhx/SwiftGModule/workflows/macOS%2010.15/badge.svg)
-![Ubuntu 20.04 build](https://github.com/rhx/SwiftGModule/workflows/Ubuntu%2020.04/badge.svg)
-![Ubuntu 18.04 build](https://github.com/rhx/SwiftGModule/workflows/Ubuntu%2018.04/badge.svg)
+![macOS](https://github.com/rhx/SwiftGModule/actions/workflows/macOS.yml/badge.svg?branch=development)
+![Linux](https://github.com/rhx/SwiftGModule/actions/workflows/Linux.yml/badge.svg?branch=development)
+![DocC](https://github.com/rhx/SwiftGModule/actions/workflows/docc.yml/badge.svg?branch=development)
 
 ## What is new?
 
@@ -14,18 +13,18 @@ Version 15 of gir2swift provides a Package Manager Plugin.  This requires Swift 
 
 ## Prerequisites
 
-### Swift 5.6 or higher
+### Swift 5.7 or higher
 
 To build, download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	swift-driver version: 1.75.2 Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
-    Target: arm64-apple-macosx13.0
+	swift-driver version: 1.90.11.1 Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+    Target: arm64-apple-macosx14.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.8.1 (swift-5.8.1-RELEASE)
+	Swift version 5.10 (swift-5.10-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### GLib 2.56 or higher
@@ -59,7 +58,7 @@ On macOS, you can install glib using HomeBrew (for setup instructions, see http:
 Normally, you don't build this package directly (but for testing you can - see 'Building' below). Instead you need to embed SwiftGModule into your own project using the [Swift Package Manager](https://swift.org/package-manager/).  After installing the prerequisites (see 'Prerequisites' below), add `SwiftGModule` as a dependency to your `Package.swift` file, e.g.:
 
 ```Swift
-// swift-tools-version:5.6
+// swift-tools-version:5.7
 
 import PackageDescription
 
